@@ -1,0 +1,51 @@
+/* Nav bar */
+
+.navbar {
+    left: 0px;
+    top: 0px;
+    background-color: #ed1b24;
+    width: 100%;
+    height: 63px;
+    z-index: 54;
+  }
+  
+  .navbar .navbar-item {
+    float: left;
+    width: 33.33%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .navbar .logo {
+    margin: 12px;
+    height: 100%;
+    float: left;
+    position: relative;
+  }
+  .navbar .logo-description {
+    margin-top: 12px;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    vertical-align: middle;
+    float: left;
+    position: relative;
+  }
+  
+  .navbar .title {
+    text-align: center;
+    position: relative;
+  }
+  
+  .navbar .title-content {
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+    vertical-align: middle;
+    margin-top: 10px;
+    font-size: 33.33px;
+    font-weight: 600;
+  }
+  
+  .navbar .menu {
+    float: right;
+    margin: 12px;
+  }
