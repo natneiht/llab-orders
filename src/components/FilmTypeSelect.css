@@ -1,0 +1,12 @@
+.film-type-option {
+    border-radius: 0px;
+    margin: 10px;
+    border-color: #c2c2c2;
+    background-color: #c2c2c2;
+    width: 150px;
+}
+
+#film-type-select .active {
+    border-color: #ed1b24;
+    background-color: #ed1b24;
+}

@@ -7,8 +7,8 @@ class NavBar extends PureComponent {
         return (
             <div className="navbar">
                 <div className="navbar-item">
-                    <div className="logo"><img src="images/llab.png" /></div>
-                    <div className="logo-description">
+                    <div className="logo align-middle"><img src="images/llab.png" /></div>
+                    <div className="logo-description align-middle">
                     TRÁNG FILM &amp; SCAN
                     <div>(Film development &amp; Scan)</div>
                     </div>
@@ -16,8 +16,8 @@ class NavBar extends PureComponent {
                 <div className="navbar-item">
                     <div className="title"><div className="title-content">TẠO ĐƠN HÀNG</div></div>
                 </div>
-                <div className="navbar-item">
-                    <div className="menu"><img src="images/LIST.png" /></div>
+                <div className="navbar-item align-middle">
+                    <div className="menu align-middle hamburger-menu"><img src="images/list.png" className="hamburger-icon"/></div>
                 </div>
                 </div>
 
