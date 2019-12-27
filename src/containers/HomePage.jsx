@@ -54,7 +54,7 @@ class HomePage extends PureComponent {
         console.log(renderFilmList);
         return (
             <div>
-                <NavBar />
+                <NavBar title="TẠO ĐƠN HÀNG" />
                 <div className="container">
                     <CustomerFormInput />
                     <FilmTypeSelect currentFimSize={currentFimSize} onChangeFilmSize={this.handleChangeFilmSize} />
