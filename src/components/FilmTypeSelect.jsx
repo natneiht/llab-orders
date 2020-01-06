@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 class FilmTypeSelect extends PureComponent {
   render() {
-    const { onChangeFilmSize, currentFimSize } = this.props;
+    const { onChangeFilmSize, currentFilmSize } = this.props;
     const filmSizeList = {
-      "135": "Film 135",
-      "120": "Film 120",
+      "film135": "Film 135",
+      "film120": "Film 120",
       "other": "Film khác"
     };
     return (
@@ -21,7 +21,7 @@ class FilmTypeSelect extends PureComponent {
           {Object.keys(filmSizeList).map((size) => (
             <label
               className={`btn btn-secondary film-type-option ${
-                size === currentFimSize ? "active" : ""
+                size === currentFilmSize ? "active" : ""
               }`}
             >
               <input

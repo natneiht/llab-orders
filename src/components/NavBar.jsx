@@ -21,7 +21,14 @@ class NavBar extends PureComponent {
                 <div className="navbar-item align-middle">
                     <div className="menu align-middle hamburger-menu"><img src="images/list.png" className="hamburger-icon"/></div>
                 </div>
-                </div>
+                {/* <div className="hamburger-menu">
+                    <ul>
+                        <li className="hamburger-menu-item">Photo printing</li>
+                        <li className="hamburger-menu-item">Manager</li>
+                        <li className="hamburger-menu-item">Logout</li>
+                    </ul>
+                </div> */}
+        </div>
 
         );
     }

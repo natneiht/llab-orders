@@ -9,11 +9,11 @@ class FilmDetailSelect extends PureComponent {
   //   this.state = {
   //     filmDetailList: []
   //   };
-  // }
+  // }  
 
   render() {
     // const { filmDetailList } = this.state;
-    const { renderList } = this.props;
+    const { renderList, currentFilmSize, onChangeDetail } = this.props;
     if (!renderList) return <div>Loading...</div>;
     return (
       <div className="row">
@@ -24,13 +24,14 @@ class FilmDetailSelect extends PureComponent {
               <th scope="col">Tráng/ Development</th>
               <th scope="col">Scan</th>
               <th scope="col">Có viền/ Border</th>
-              <th scope="col">Highres +10k</th>
+              <th scope="col">Highres</th>
+              <th scope="col">Push</th>
               <th scope="col">SL/Roll(s)</th>
             </tr>
           </thead>
           <tbody>
             {renderList.map((item) => (
-              <OrderRow itemName={item.name} itemDetail={item.detail} itemSelected={item.isSelected} />
+               item['filmSize'] == currentFilmSize? <OrderRow itemName={item.name} key={item.key} itemKey={item.key} itemDetail={item.detail} itemSelected={item.isSelected} onChangeDetail={onChangeDetail}/> : null
             ))}
           </tbody>
         </table>

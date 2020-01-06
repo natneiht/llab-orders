@@ -1,73 +1,124 @@
-import React, { PureComponent } from 'react';
-import './HomePage.css';
-import PropTypes from 'prop-types';
-import NavBar from '../components/NavBar';
-import CustomerFormInput from '../components/CustomerFormInput';
-import FilmTypeSelect from '../components/FilmTypeSelect';
-import FilmDetailSelect from '../components/FilmDetailSelect';
-import FilmOrderNote from '../components/FilmOrderNote';
+import React, { PureComponent } from "react";
+import "./HomePage.css";
+import PropTypes from "prop-types";
+import NavBar from "../components/NavBar";
+import CustomerFormInput from "../components/CustomerFormInput";
+import FilmTypeSelect from "../components/FilmTypeSelect";
+import FilmDetailSelect from "../components/FilmDetailSelect";
+import { getFilmSize } from "../functions";
+import { filmPrice } from "../filmSizeOption";
+import OrderConfirm from "../components/OrderConfirm";
 
 class HomePage extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filmDetailList: [],
-            currentFimSize: "135"
-        }
-    }
-    
-    handleChangeFilmSize = (size) => {
-        this.setState({currentFimSize: size})
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      filmDetailList: [],
+      currentFilmSize: "film135",
+      showConfirm: false
+    };
+  }
 
-    componentDidMount() {
-        const defaultAttribute = {
-            isDevelop: false,
-            isScan: false,
-            isBorder: false,
-            isHighres: false,
-            quantity: null
-          };
-      
-          const filmDetail = {
-            "135": [
-              "Film màu",
-              "Film trắng đen",
-              "Film dương bản",
-              "Tráng cross",
-              "Kodak Vision"
-            ],
-            "120": ["Film màu", "Film trắng đen", "Film dương bản", "Tráng cross"]
-          };
-      
-          let filmDetailArray = [];
-          Object.keys(filmDetail).map(filmSize => filmDetail[filmSize].map((item) =>
-            filmDetailArray.push({ detail: {...defaultAttribute}, name: item, filmSize , isSelected: false })
-          ));
-          console.log(filmDetailArray);
-          this.setState({filmDetailList: filmDetailArray})
+  componentDidMount() {
+    const defaultAttribute = {
+      isSelected: false,
+      isDevelop: false,
+      isScan: false,
+      isBorder: false,
+      isHighres: false,
+      isPush: false,
+      pushLevel: 0,
+      quantity: null
+    };
+
+    let filmDetailArray = [];
+    Object.keys(filmPrice).map((filmSize) =>
+      filmPrice[filmSize].map((item) =>
+        filmDetailArray.push({
+          detail: { ...defaultAttribute },
+          key: item["key"],
+          name: item["name"],
+          filmSize
+        })
+      )
+    );
+    console.log(filmDetailArray);
+    const filmSizeList = getFilmSize().data.items;
+    this.setState({ filmDetailList: filmDetailArray, filmSizeList });
+  }
+
+  // For film size switch area
+  handleChangeFilmSize = (size) => {
+    this.setState({ currentFilmSize: size });
+  };
+
+  // For each film row action
+  handleChangeItemDetail = (key, detail) => {
+    const newFilmList = [...this.state.filmDetailList];
+    const itemIndex = newFilmList.findIndex((item) => item.key === key);
+    console.log(itemIndex);
+    if (itemIndex >= 0) {
+      newFilmList[itemIndex] = { ...newFilmList[itemIndex], detail };
     }
-    
-    render() {
-        const { currentFimSize, filmDetailList } = this.state;
-        const renderFilmList = filmDetailList.filter(item => item.filmSize === currentFimSize);
-        console.log(renderFilmList);
-        return (
-            <div>
-                <NavBar title="TẠO ĐƠN HÀNG" />
-                <div className="container">
-                    <CustomerFormInput />
-                    <FilmTypeSelect currentFimSize={currentFimSize} onChangeFilmSize={this.handleChangeFilmSize} />
-                    <FilmDetailSelect renderList={renderFilmList} />
-                    <FilmOrderNote />
-                </div>
+    console.log(newFilmList);
+    this.setState({ filmDetailList: newFilmList });
+  };
+
+  toogleConfirmBox = () => {
+    this.setState({ showConfirm: !this.state.showConfirm });
+  };
+
+  render() {
+    const { currentFilmSize, filmDetailList, showConfirm } = this.state;
+    return (
+      <div>
+        <NavBar title="TẠO ĐƠN HÀNG" />
+        <div className="container">
+          <CustomerFormInput />
+          <FilmTypeSelect
+            currentFilmSize={currentFilmSize}
+            onChangeFilmSize={this.handleChangeFilmSize}
+          />
+          <FilmDetailSelect
+            currentFilmSize={currentFilmSize}
+            renderList={filmDetailList}
+            onChangeDetail={this.handleChangeItemDetail}
+          />
+          <div className="row">
+            <div className="col-8">
+              <div className="note-label">Ghi chú:</div>
+              <textarea className="note-content" />
             </div>
-        );
-    }
+            <div className="col-4">
+              <ul className="note-notice">
+                <li>
+                  Vui lòng điền đẩy đủ thông tin để chúng tôi được phục vụ bạn
+                  một cách tốt nhất.
+                </li>
+                <li>
+                  To serve you in the best way possible, please fill in the form
+                  above.
+                </li>
+              </ul>
+
+              <button
+                className="submit-button"
+                onClick={() => this.toogleConfirmBox()}
+              >
+                Submit
+              </button>
+              <OrderConfirm
+                show={showConfirm}
+                hide={() => this.toogleConfirmBox()}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-HomePage.propTypes = {
-
-};
+HomePage.propTypes = {};
 
 export default HomePage;

@@ -48,12 +48,30 @@
     margin-right: 12px;
   }
 
-  .hamburger-menu {
+  .hamburger-icon {
     width: 47px;
     height: 47px;
+    float: right;
   }
 
-  .hamburger-icon {
+  /* .hamburger-icon {
     width: 100%;
     height: 100%;
+  } */
+
+  .hamburger-menu {
+    width: 100%;
+  }
+
+  .hamburger-menu ul li {
+    display: block ;
+    float: right;
+  }
+
+  .hamburger-menu-item {
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    float: right;
+    clear: both;
   }
