@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/llab-orders/static/css/main.95b7148b.chunk.css",
+    "main.js": "/llab-orders/static/js/main.dd34cf8e.chunk.js",
+    "main.js.map": "/llab-orders/static/js/main.dd34cf8e.chunk.js.map",
+    "runtime-main.js": "/llab-orders/static/js/runtime-main.373b2249.js",
+    "runtime-main.js.map": "/llab-orders/static/js/runtime-main.373b2249.js.map",
+    "static/js/2.310ab588.chunk.js": "/llab-orders/static/js/2.310ab588.chunk.js",
+    "static/js/2.310ab588.chunk.js.map": "/llab-orders/static/js/2.310ab588.chunk.js.map",
+    "index.html": "/llab-orders/index.html",
+    "precache-manifest.ded80840e6d8118e6ec4a4d3e4b4824a.js": "/llab-orders/precache-manifest.ded80840e6d8118e6ec4a4d3e4b4824a.js",
+    "service-worker.js": "/llab-orders/service-worker.js",
+    "static/css/main.95b7148b.chunk.css.map": "/llab-orders/static/css/main.95b7148b.chunk.css.map",
+    "static/js/2.310ab588.chunk.js.LICENSE": "/llab-orders/static/js/2.310ab588.chunk.js.LICENSE",
+    "static/media/logo.svg": "/llab-orders/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.373b2249.js",
+    "static/js/2.310ab588.chunk.js",
+    "static/css/main.95b7148b.chunk.css",
+    "static/js/main.dd34cf8e.chunk.js"
+  ]
+}
