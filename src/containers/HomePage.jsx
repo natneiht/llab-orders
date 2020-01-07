@@ -14,6 +14,11 @@ class HomePage extends PureComponent {
     super(props);
     this.state = {
       filmDetailList: [],
+      customerInfomation: {
+        name: null,
+        phoneNumber: null,
+        email: null
+      },
       currentFilmSize: "film135",
       showConfirm: false
     };
@@ -42,7 +47,7 @@ class HomePage extends PureComponent {
         })
       )
     );
-    console.log(filmDetailArray);
+    // console.log(filmDetailArray);
     const filmSizeList = getFilmSize().data.items;
     this.setState({ filmDetailList: filmDetailArray, filmSizeList });
   }
@@ -56,25 +61,34 @@ class HomePage extends PureComponent {
   handleChangeItemDetail = (key, detail) => {
     const newFilmList = [...this.state.filmDetailList];
     const itemIndex = newFilmList.findIndex((item) => item.key === key);
-    console.log(itemIndex);
+    // console.log(itemIndex);
     if (itemIndex >= 0) {
       newFilmList[itemIndex] = { ...newFilmList[itemIndex], detail };
     }
-    console.log(newFilmList);
+    // console.log(newFilmList);
     this.setState({ filmDetailList: newFilmList });
   };
 
+  changeCustomerInfomation = (field, value) => {
+    this.setState({customerInfomation: {
+      ...this.state.customerInfomation,
+      [field]: value,
+    }})
+  }
   toogleConfirmBox = () => {
     this.setState({ showConfirm: !this.state.showConfirm });
   };
 
   render() {
-    const { currentFilmSize, filmDetailList, showConfirm } = this.state;
+    const { customerInfomation, currentFilmSize, filmDetailList, showConfirm } = this.state;
+    const totalProducts = filmDetailList.filter(item => item.detail.isSelected===true);
+    // console.log(totalProducts);
+    // console.log(customerInfomation);
     return (
       <div>
         <NavBar title="TẠO ĐƠN HÀNG" />
         <div className="container">
-          <CustomerFormInput />
+          <CustomerFormInput changeCustomerInfomation={this.changeCustomerInfomation}/>
           <FilmTypeSelect
             currentFilmSize={currentFilmSize}
             onChangeFilmSize={this.handleChangeFilmSize}
@@ -108,6 +122,8 @@ class HomePage extends PureComponent {
                 Submit
               </button>
               <OrderConfirm
+                customerInfomation={customerInfomation}
+                totalProducts={totalProducts}
                 show={showConfirm}
                 hide={() => this.toogleConfirmBox()}
               />

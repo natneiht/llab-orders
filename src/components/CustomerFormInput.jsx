@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 class CustomerFormInput extends PureComponent {
     render() {
+        const { changeCustomerInfomation } = this.props;
         return (
             <div className="customer-form-area">
                 <div className="col-6 input-field-wrapper">
@@ -12,7 +13,7 @@ class CustomerFormInput extends PureComponent {
                             Số điện thoại/ Phone number:
                         </div>
                         <div className="col-6">
-                            <input type="text" className="customer-form-input" />
+                            <input type="text" className="customer-form-input" onChange={e => changeCustomerInfomation("phoneNumber",e.target.value)}/>
                         </div>
                     </div>
                     <div className="row customer-field align-middle">
@@ -20,7 +21,7 @@ class CustomerFormInput extends PureComponent {
                             Họ và tên/  Full name:
                         </div>
                         <div className="col-6">
-                            <input type="text" className="customer-form-input" />
+                            <input type="text" className="customer-form-input" onChange={e => changeCustomerInfomation("name",e.target.value)}/>
                         </div>
                     </div>
                     <div className="row customer-field align-middle">
@@ -28,7 +29,7 @@ class CustomerFormInput extends PureComponent {
                             Email:
                         </div>
                         <div className="col-6">
-                            <input type="text" className="customer-form-input" />
+                            <input type="text" className="customer-form-input" onChange={e => changeCustomerInfomation("email",e.target.value)}/>
                         </div>
                     </div>
                 </div>

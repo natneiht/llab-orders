@@ -23,3 +23,22 @@
     width: 250px;
     height: 40px;
 }
+
+/* OrderConfirm component's CSS */
+
+.order-confirm-heading {
+    color: #ed1b24;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.order-content-wrapper {
+    margin-left: 10px;
+}
+
+.order-confirm-field {
+    color: #2f2f2f;
+    font-size: 16px;
+}
+
+/* End */

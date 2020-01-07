@@ -63,14 +63,29 @@
     width: 100%;
   }
 
-  .hamburger-menu ul li {
-    display: block ;
+  .hamburger-icon:hover, .hamburger-menu:hover ul, li {
+    display: block;
+  }
+
+  .hamburger-menu ul {
+    display: none;
+    padding-top: 10px;
     float: right;
   }
 
+  .hamburger-menu ul li {
+    display: block ;
+    float: right;
+    clear: both;
+    /* vertical-align: middle; */
+    box-sizing: border-box;
+    border-width: 2px;
+  }
+
   .hamburger-menu-item {
-    width: 100px;
-    height: 50px;
+    width: 125px;
+    height: 100px;
+    /* margin-top: 2px; */
     background-color: white;
     float: right;
     clear: both;

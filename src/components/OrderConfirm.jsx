@@ -5,7 +5,8 @@ import OrderConfirmDetail from "./OrderConfirmDetail";
 
 class OrderConfirm extends PureComponent {
   render() {
-    const { show, hide } = this.props;
+    const { show, hide, totalProducts, customerInfomation } = this.props;
+    // console.log(totalProducts);
     return (
       <>
         <Modal show={this.props.show} onHide={() => hide()}>
@@ -13,7 +14,7 @@ class OrderConfirm extends PureComponent {
             <Modal.Title>Xác nhận đơn hàng</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <OrderConfirmDetail />
+            <OrderConfirmDetail customerInfomation={customerInfomation} totalProducts={totalProducts}/>
           </Modal.Body>
           <Modal.Footer>
             <button className="submit-button" onClick={() => hide()}>
