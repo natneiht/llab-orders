@@ -3,9 +3,10 @@
 import React, { Fragment } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 
-const Profile = () => {
+const Profile = (props) => {
   const { loading, user } = useAuth0();
-
+  console.log(user);
+  console.log(props);
   if (loading || !user) {
     return <div>Loading...</div>;
   }

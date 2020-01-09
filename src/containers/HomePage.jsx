@@ -19,6 +19,7 @@ class HomePage extends PureComponent {
         phoneNumber: null,
         email: null
       },
+      orderNote: null,
       currentFilmSize: "film135",
       showConfirm: false
     };
@@ -70,25 +71,41 @@ class HomePage extends PureComponent {
   };
 
   changeCustomerInfomation = (field, value) => {
-    this.setState({customerInfomation: {
-      ...this.state.customerInfomation,
-      [field]: value,
-    }})
-  }
+    this.setState({
+      customerInfomation: {
+        ...this.state.customerInfomation,
+        [field]: value
+      }
+    });
+  };
+
+  changeOrderNote = (content) => {
+    this.setState({ orderNote: content });
+  };
   toogleConfirmBox = () => {
     this.setState({ showConfirm: !this.state.showConfirm });
   };
 
   render() {
-    const { customerInfomation, currentFilmSize, filmDetailList, showConfirm } = this.state;
-    const totalProducts = filmDetailList.filter(item => item.detail.isSelected===true);
+    const {
+      customerInfomation,
+      currentFilmSize,
+      filmDetailList,
+      showConfirm,
+      orderNote
+    } = this.state;
+    const totalProducts = filmDetailList.filter(
+      (item) => item.detail.isSelected === true
+    );
     // console.log(totalProducts);
     // console.log(customerInfomation);
     return (
       <div>
-        <NavBar title="TẠO ĐƠN HÀNG" />
+        {/* <NavBar title="TẠO ĐƠN HÀNG" /> */}
         <div className="container">
-          <CustomerFormInput changeCustomerInfomation={this.changeCustomerInfomation}/>
+          <CustomerFormInput
+            changeCustomerInfomation={this.changeCustomerInfomation}
+          />
           <FilmTypeSelect
             currentFilmSize={currentFilmSize}
             onChangeFilmSize={this.handleChangeFilmSize}
@@ -101,7 +118,12 @@ class HomePage extends PureComponent {
           <div className="row">
             <div className="col-8">
               <div className="note-label">Ghi chú:</div>
-              <textarea className="note-content" />
+              <textarea
+                className="note-content"
+                onChange={(e) => this.changeOrderNote(e.target.value)}
+              >
+                {orderNote}
+              </textarea>
             </div>
             <div className="col-4">
               <ul className="note-notice">
@@ -124,6 +146,7 @@ class HomePage extends PureComponent {
               <OrderConfirm
                 customerInfomation={customerInfomation}
                 totalProducts={totalProducts}
+                orderNote={orderNote}
                 show={showConfirm}
                 hide={() => this.toogleConfirmBox()}
               />

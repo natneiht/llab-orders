@@ -2,7 +2,6 @@
   "name": "llab-orders",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shmfih.github.io/llab-orders/",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.0",
     "@testing-library/jest-dom": "^4.2.4",

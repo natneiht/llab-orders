@@ -36,7 +36,7 @@ class OrderConfirmDetail extends PureComponent {
   };
 
   render() {
-    const { totalProducts, customerInfomation } = this.props;
+    const { totalProducts, customerInfomation, orderNote } = this.props;
     const { name, phoneNumber, email } = customerInfomation;
     const renderList = {
       film135: totalProducts.filter((item) => item.filmSize === "film135"),
@@ -57,50 +57,51 @@ class OrderConfirmDetail extends PureComponent {
             Object.keys(renderList).map((filmSizeKey) => {
               const productGroup = renderList[filmSizeKey];
               return (
-              <>
-                {productGroup.length > 0 && (
-                  <div className="row">{filmSizeKey}</div>
-                )}
-                {productGroup &&
-                  productGroup.map((item) => {
-                    const { key, filmSize, detail } = item;
-                    const {
-                      isDevelop,
-                      isScan,
-                      isBorder,
-                      isHighres,
-                      isPush,
-                      pushLevel,
-                      quantity
-                    } = detail;
-                    return (
-                      <div className="row">
-                        <div className="col-8">{item.name}
-                        <ul>
-                          { (isDevelop && isScan) && <li>+ Dev & scan</li> }
-                          { (isDevelop && !isScan) && <li>+ Dev only</li> }
-                          { (!isDevelop && isScan) && <li>+ Scan only</li> }
-                          { isBorder && <li>Border</li> }
-                          { isHighres && <li>Highres</li> }
-                    { isPush && <li>Push: {pushLevel}</li> }
-                          
-                        </ul>
+                <>
+                  {productGroup.length > 0 && (
+                    <div className="row">{filmSizeKey}</div>
+                  )}
+                  {productGroup &&
+                    productGroup.map((item) => {
+                      const { key, filmSize, detail } = item;
+                      const {
+                        isDevelop,
+                        isScan,
+                        isBorder,
+                        isHighres,
+                        isPush,
+                        pushLevel,
+                        quantity
+                      } = detail;
+                      return (
+                        <div className="row">
+                          <div className="col-8">
+                            {item.name}
+                            <ul>
+                              {isDevelop && isScan && <li>+ Dev & scan</li>}
+                              {isDevelop && !isScan && <li>+ Dev only</li>}
+                              {!isDevelop && isScan && <li>+ Scan only</li>}
+                              {isBorder && <li>Border</li>}
+                              {isHighres && <li>Highres</li>}
+                              {isPush && <li>Push: {pushLevel}</li>}
+                            </ul>
+                          </div>
+                          <div className="col-2">
+                            {quantity === null ? 1 : quantity}
+                          </div>
+                          <div className="col-2">
+                            {formatCurrency(this.calcTotalPayment(item))}
+                          </div>
                         </div>
-                        <div className="col-2">
-                          {quantity === null
-                            ? 1
-                            : quantity}
-                        </div>
-                        <div className="col-2">
-                          {formatCurrency(this.calcTotalPayment(item))}
-                        </div>
-                      </div>
-                  )})}
-              </>
-            )})}
+                      );
+                    })}
+                </>
+              );
+            })}
         </div>
 
         <div className="order-confirm-heading">Ghi chú/ Note</div>
+        <div className="order-content-wrapper">{orderNote}</div>
       </div>
     );
   }
