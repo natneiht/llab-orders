@@ -12,12 +12,13 @@ import SearchPage from "./containers/SearchPage";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import NavBar from "./components/NavBar";
+import LoadingScreen from "./containers/LoadingScreen";
 
 const App = () => {
   const { loading } = useAuth0();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
   return (
     <div className="App">
