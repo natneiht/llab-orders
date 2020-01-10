@@ -43,6 +43,7 @@ class OrderConfirmDetail extends PureComponent {
       film120: totalProducts.filter((item) => item.filmSize === "film120"),
       other: totalProducts.filter((item) => item.filmSize === "other")
     };
+    console.log(totalProducts);
     return (
       <div>
         <div className="order-confirm-heading">Khách hàng/ Customer</div>

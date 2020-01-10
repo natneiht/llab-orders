@@ -38,6 +38,10 @@ class OrderRow extends PureComponent {
       // Only highres when scan option is selected
       return { ...detail, isSelected: true, isScan: true };
     }
+    if (pushLevel>0) {
+      // Only highres when scan option is selected
+      return { ...detail, isPush: true };
+    }
     if (!isScan) {
       // No scan, no highres
       return { ...detail, isHighres: false };
@@ -111,7 +115,11 @@ class OrderRow extends PureComponent {
           <select
             style={{ verticalAlign: "middle" }}
             value={pushLevel}
-            onChange={(e) => this.changeDetail("pushLevel", e.target.value)}
+            onChange={(e) => {
+              this.changeDetail("pushLevel", e.target.value)
+              this.changeDetail("isPush", e.target.value>0?true:false)
+            
+            }}
           >
             <option value="0">0</option>
             <option value="1">+1</option>
