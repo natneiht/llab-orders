@@ -1,12 +1,14 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState } from "react";
 import "./NavBar.css";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
+import NavBarMenu from "./NavBarMenu";
 
 const NavBar = (props) => {
     // const { title } = this.props;
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    const [showMenu, setshowMenu] = useState(false);
     console.log(isAuthenticated);
     return (
       <div className="navbar">
@@ -29,13 +31,14 @@ const NavBar = (props) => {
         <div className="navbar-item align-middle">
         <div className="hamburger-menu">
           <div className="menu align-middle hamburger-icon">
-            <img src="images/list.png" className="hamburger-icon" />
-            <ul className="menu-ul">
+            <img src="images/list.png" className="hamburger-icon" onClick={() => setshowMenu(!showMenu)} />
+            {showMenu && <NavBarMenu toogleMenu={() => setshowMenu(!showMenu)}/>}
+            {/* <ul className="menu-ul">
               <li className="hamburger-menu-item" onClick={()=>loginWithRedirect()}>Photo printing</li><hr />
               <li className="hamburger-menu-item"><Link to='/profile'>Profile</Link></li>
               <li className="hamburger-menu-item"><Link to='/login'>Login</Link></li>
               <li className="hamburger-menu-item">Logout</li>
-            </ul>
+            </ul> */}
           </div>
           
 

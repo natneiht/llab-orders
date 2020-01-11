@@ -102,7 +102,7 @@ class HomePage extends PureComponent {
     return (
       <div>
         {/* <NavBar title="TẠO ĐƠN HÀNG" /> */}
-        <div className="container">
+        <div className="container hompage-wrapper">
           <CustomerFormInput
             changeCustomerInfomation={this.changeCustomerInfomation}
           />
