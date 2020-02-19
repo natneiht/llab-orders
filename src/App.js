@@ -53,7 +53,13 @@ class App extends PureComponent {
             <NavBar tittle="LLAB" />
             <Switch>
               <PrivateRoute exact path="/" component={HomePage} />
-              <Route exact path="/login" component={AdminLogin} />
+              <Route
+                exact
+                path="/login"
+                component={(props) => (
+                  <AdminLogin setLoginStatus={this.setLoginStatus} />
+                )}
+              />
               <PrivateRoute exact path="/manager" component={OrderManager} />
               <PrivateRoute exact path="/search" component={SearchPage} />
               <PrivateRoute exact path="/profile" component={Profile} />
