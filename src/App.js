@@ -33,7 +33,7 @@ class App extends PureComponent {
   }
   setLoginStatus = (currentUser, token) => {
     if (currentUser && token) {
-      this.setState({ isLogin: false, currentUser, token });
+      this.setState({ isLogin: true, currentUser, token });
     }
   };
 
