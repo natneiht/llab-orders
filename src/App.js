@@ -1,45 +1,68 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Switch, Router } from "react-router-dom";
-import { useAuth0 } from "./react-auth0-spa";
-
 import HomePage from "./containers/HomePage";
 import CustomerFormInput from "./components/CustomerFormInput";
 import AdminLogin from "./containers/AdminLogin";
 import OrderManager from "./containers/OrderManager";
 import SearchPage from "./containers/SearchPage";
 import Profile from "./components/Profile";
-import history from "./utils/history";
 import NavBar from "./components/NavBar";
 import LoadingScreen from "./containers/LoadingScreen";
+import { AuthProvider } from "./authContext/index";
+import PrivateRoute from "./components/PrivateRoute";
 
-const App = () => {
-  const { loading } = useAuth0();
-
-  if (loading) {
-    return <LoadingScreen />;
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+      currentUser: null,
+      token: null
+    };
   }
-  return (
-    <div className="App">
-      <BrowserRouter>
-        {/* <PrimarySearchAppBar /> */}
-        <Router history={history}>
-          <NavBar tittle="LLAB" />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/login" component={AdminLogin} />
-            <Route exact path="/manager" component={OrderManager} />
-            <Route exact path="/search" component={SearchPage} />
-            <Route exact path="/profile" component={Profile} />
-            {/* <Route component={NotFound} /> */}
-          </Switch>
-          {/* <Footer /> */}
-        </Router>
-      </BrowserRouter>
-      {/* <HomePage /> */}
-    </div>
-  );
-};
+
+  componentDidMount() {
+    const localSession = JSON.parse(localStorage.getItem("llab"));
+    // console.log(localSession);
+    if (localSession) {
+      const { isLogin, currentUser, token } = localSession;
+      this.setState({ isLogin: isLogin ? true : false, currentUser, token });
+    }
+  }
+  setLoginStatus = (currentUser, token) => {
+    if (currentUser && token) {
+      this.setState({ isLogin: false, currentUser, token });
+    }
+  };
+
+  render() {
+    const { isLogin, currentUser, token } = this.state;
+    return (
+      <AuthProvider
+        value={{
+          isLogin,
+          currentUser,
+          token,
+          setLoginStatus: this.setLoginStatus
+        }}
+      >
+        <div className="App">
+          <BrowserRouter>
+            <NavBar tittle="LLAB" />
+            <Switch>
+              <PrivateRoute exact path="/" component={HomePage} />
+              <Route exact path="/login" component={AdminLogin} />
+              <PrivateRoute exact path="/manager" component={OrderManager} />
+              <PrivateRoute exact path="/search" component={SearchPage} />
+              <PrivateRoute exact path="/profile" component={Profile} />
+            </Switch>
+          </BrowserRouter>
+        </div>
+      </AuthProvider>
+    );
+  }
+}
 
 export default App;

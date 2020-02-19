@@ -6,9 +6,9 @@ class FilmTypeSelect extends PureComponent {
   render() {
     const { onChangeFilmSize, currentFilmSize } = this.props;
     const filmSizeList = {
-      "film135": "Film 135",
-      "film120": "Film 120",
-      "other": "Film khác"
+      "135mm": "Film 135",
+      "120mm": "Film 120",
+      other: "Film khác"
     };
     return (
       <div className="row">

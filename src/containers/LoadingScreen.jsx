@@ -11,10 +11,14 @@ class LoadingScreen extends PureComponent {
             <img className="plashscreen-logo" src="/images/llab_logo.png" />
           </div>
           <div className="col-7 plashscreen-text">
-              
             <div className="plashscreen-text-vi">TRÁNG FILM & SCAN</div>
             <div className="plashscreen-text-en">(FILM DEVELOPMENT & SCAN)</div>
-            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
           </div>
         </div>
       </div>
