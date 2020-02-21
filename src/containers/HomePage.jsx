@@ -14,6 +14,7 @@ import AuthContext, {
   AuthConsumer,
   withAuthContext
 } from "../authContext/index";
+import { Redirect } from "react-router";
 
 class HomePage extends PureComponent {
   constructor(props) {
@@ -33,10 +34,7 @@ class HomePage extends PureComponent {
   }
 
   async componentDidMount() {
-    // console.log(await getLoginToken());
     // const filmSizeList = getFilmSizeList();
-    const contextType = AuthContext;
-    console.log("contextType", this.context);
     const attribTemplate = {
       is_selected: false,
       // is_develop: false,
@@ -68,9 +66,7 @@ class HomePage extends PureComponent {
         })
       );
       this.setState({ newFilmSizeList: filmList });
-      console.log(filmList);
     });
-    console.log(filmSizeList);
 
     // Old film size list
     const defaultAttribute = {
@@ -95,8 +91,6 @@ class HomePage extends PureComponent {
         })
       )
     );
-    // console.log(JSON.stringify(filmDetailArray));
-    console.log(filmDetailArray);
     this.setState({ filmDetailList: filmDetailArray, filmSizeList });
   }
 
@@ -109,11 +103,9 @@ class HomePage extends PureComponent {
   handleChangeItemDetail = (key, detail) => {
     const newFilmList = [...this.state.newFilmSizeList];
     const itemIndex = newFilmList.findIndex((item) => item.key === key);
-    // console.log(itemIndex);
     if (itemIndex >= 0) {
       newFilmList[itemIndex] = { ...newFilmList[itemIndex], detail };
     }
-    // console.log(newFilmList);
     this.setState({ newFilmSizeList: newFilmList });
   };
 
@@ -134,6 +126,8 @@ class HomePage extends PureComponent {
   };
 
   render() {
+    const { isLogin } = this.props;
+    if (!isLogin) return <Redirect to="/login" />;
     const {
       customerInfomation,
       currentFilmSize,
@@ -145,7 +139,6 @@ class HomePage extends PureComponent {
     const totalProducts = newFilmSizeList.filter(
       (item) => item.detail.isSelected === true
     );
-    console.log("props", this.props);
     return (
       <div className="container hompage-wrapper">
         <CustomerFormInput

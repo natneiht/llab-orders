@@ -25,7 +25,6 @@ class App extends PureComponent {
 
   componentDidMount() {
     const localSession = JSON.parse(localStorage.getItem("llab"));
-    // console.log(localSession);
     if (localSession) {
       const { isLogin, currentUser, token } = localSession;
       this.setState({ isLogin: isLogin ? true : false, currentUser, token });
@@ -33,8 +32,16 @@ class App extends PureComponent {
   }
   setLoginStatus = (currentUser, token) => {
     if (currentUser && token) {
-      this.setState({ isLogin: true, currentUser, token });
+      const loginState = { isLogin: true, currentUser, token };
+      this.setState(loginState);
+      localStorage.setItem("llab", JSON.stringify(loginState));
+      window.location = "/";
     }
+  };
+
+  clearLoginStatus = () => {
+    this.setState({ isLogin: false, token: null });
+    localStorage.removeItem("llab");
   };
 
   render() {
@@ -45,7 +52,8 @@ class App extends PureComponent {
           isLogin,
           currentUser,
           token,
-          setLoginStatus: this.setLoginStatus
+          setLoginStatus: this.setLoginStatus,
+          clearLoginStatus: this.clearLoginStatus
         }}
       >
         <div className="App">

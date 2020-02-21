@@ -13,7 +13,6 @@ class OrderRow extends PureComponent {
 
   changeDetail = (name, value) => {
     const { onChangeDetail, itemDetail, itemKey } = this.props;
-    console.log(name, value);
     const newDetail = { ...itemDetail, [name]: value };
     onChangeDetail(itemKey, this.validCheckbox(newDetail));
   };
@@ -30,7 +29,6 @@ class OrderRow extends PureComponent {
     //   pushLevel,
     //   quantity
     // } = detail;
-    // // console.log(detail);
     // if (isBorder) {
     //   // For quick selecting
     //   return { ...detail, isSelected: true, isDevelop: true, isScan: true };

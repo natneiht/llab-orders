@@ -15,7 +15,6 @@ export async function getFilmSizeList() {
         }
       };
       axios.post(API_ROUTE.FILM_SIZE, config).then((data) => {
-        // console.log(data);
         resolve(data.data.items);
       });
     } catch (err) {

@@ -2,14 +2,10 @@ import React, { PureComponent, useState } from "react";
 import "./NavBar.css";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-// import { useAuth0 } from "../react-auth0-spa";
 import NavBarMenu from "./NavBarMenu";
 
 const NavBar = (props) => {
-  // const { title } = this.props;
-  // const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const [showMenu, setshowMenu] = useState(false);
-  // console.log(isAuthenticated);
   return (
     <div className="navbar">
       <div className="navbar-item">

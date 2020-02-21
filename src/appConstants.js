@@ -6,6 +6,10 @@ export const API_ROUTE = {
 export const REQUEST_HEADER = {
   Authorization: null
 };
+
+export const ADMIN_PATH = {
+  CATEGORIES_MANAGE: "/categories"
+};
 // export const defaultFilmAttrib = {
 //     is_dev: false,
 

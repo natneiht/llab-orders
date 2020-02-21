@@ -1,7 +1,35 @@
 import { API_URL, API_ROUTE } from "./appConstants";
 import axios from "axios";
 
-export const loginWithEmailAndPassword = (email, password) => {
+export const loginWithEmailAndPassword = (
+  email,
+  password,
+  location,
+  anonymToken
+) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: anonymToken
+        }
+      };
+      const body = JSON.stringify({ email, password, location });
+      axios.post(API_ROUTE.LOGIN, body, config).then((response) => {
+        if (response.data.data.can_login) {
+          resolve(response.data.data);
+        } else {
+          reject("User can not login!");
+        }
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+export const getAnonymousToken = () => {
   return new Promise((resolve, reject) => {
     try {
       let config = {
@@ -9,14 +37,10 @@ export const loginWithEmailAndPassword = (email, password) => {
           "Content-Type": "application/json"
         }
       };
-      const body = JSON.stringify({ email: email, password });
-      axios.post(API_ROUTE.LOGIN, body, config).then((response) => {
+      // const body = JSON.stringify({ email: email, password });
+      axios.post(API_ROUTE.LOGIN).then((response) => {
         console.log(response);
-        if (response.data.data.can_login) {
-          resolve(response.data.data.token);
-        } else {
-          reject("User can not login!");
-        }
+        resolve(response.data.data.token);
       });
     } catch (err) {
       reject(err);
@@ -33,7 +57,6 @@ export const getLoginToken = () => {
         }
       };
       axios.post(API_ROUTE.LOGIN, config).then((response) => {
-        // console.log(response);
         if (response.data.data.can_login) {
           resolve(response.data.data.token);
         } else {

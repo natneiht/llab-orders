@@ -7,13 +7,14 @@ export const withAuthContext = (Component) => {
   return (props) => {
     return (
       <AuthContext.Consumer>
-        {({ isLogin, currentUser, token }) => {
+        {(contextProps) => {
           return (
             <Component
               {...props}
-              isLogin={isLogin}
-              currentUser={currentUser}
-              token={token}
+              // isLogin={isLogin}
+              // currentUser={currentUser}
+              // token={token}
+              {...contextProps}
             />
           );
         }}

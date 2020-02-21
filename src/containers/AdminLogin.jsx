@@ -2,20 +2,20 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import NavBar from "../components/NavBar";
 import { withAuthContext } from "../authContext/index";
-import { loginWithEmailAndPassword } from "../loginFunction";
+import { loginWithEmailAndPassword, getAnonymousToken } from "../loginFunction";
 import "./AdminLogin.css";
+import { Redirect } from "react-router";
 
 class AdminLogin extends PureComponent {
-  // const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  // console.log(isAuthenticated);
-  // loginWith;
   handleLogin = async () => {
-    const token = await loginWithEmailAndPassword();
-    this.props.setLoginStatus("guest", token);
+    const anonymToken = getAnonymousToken();
+    console.log(anonymToken);
+    const response = await loginWithEmailAndPassword(null, null, anonymToken);
+    this.props.setLoginStatus("guest", response["token"]);
   };
   render() {
-    console.log(this.props);
-
+    const { isLogin } = this.props;
+    if (isLogin) return <Redirect to="/" />;
     return (
       <div>
         <NavBar title="ĐĂNG NHẬP" />

@@ -7,9 +7,11 @@ import ManageIcon from "../svg/manage.svg";
 // import ManageIcon from '../svg/manage.svg'
 import LogoutIcon from "../svg/logout.svg";
 import FindIcon from "../svg/find.svg";
+import { withAuthContext } from "../authContext/index";
 
 class NavBarMenu extends PureComponent {
   render() {
+    console.log(this.props);
     return (
       <div className="nav-bar-menu">
         <ul className="menu-ul">
@@ -36,7 +38,11 @@ class NavBarMenu extends PureComponent {
             <Link to="/login">Login</Link>
           </li>
           <li className="hamburger-menu-item">
-            <img src={LogoutIcon} className="close-hamburger-icon" />
+            <img
+              src={LogoutIcon}
+              className="close-hamburger-icon"
+              onClick={() => this.props.clearLoginStatus()}
+            />
           </li>
         </ul>
       </div>
@@ -46,4 +52,4 @@ class NavBarMenu extends PureComponent {
 
 NavBarMenu.propTypes = {};
 
-export default NavBarMenu;
+export default withAuthContext(NavBarMenu);
